@@ -1,6 +1,6 @@
 package exceptions;
 
-public class KeyNotFoundException extends Exception{
+public class KeyNotFoundException extends ADTException{
     public KeyNotFoundException(String msg){
         super(msg);
     }

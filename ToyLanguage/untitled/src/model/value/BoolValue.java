@@ -19,6 +19,10 @@ public class BoolValue implements IValue{
         return new BoolType();
     }
 
+    public boolean getValue(){
+        return value;
+    }
+
     @Override
     public String toString(){
         return String.valueOf(this.value);

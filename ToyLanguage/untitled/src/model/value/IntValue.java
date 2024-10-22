@@ -19,6 +19,10 @@ public class IntValue implements IValue{
         return other instanceof IntValue && ((IntValue) other).value == this.value;
     }
 
+    public int getValue(){
+        return value;
+    }
+
     @Override
     public String toString(){
         return Integer.toString(value);
