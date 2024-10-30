@@ -16,7 +16,7 @@ public class AssignStatement implements IStatement{
     }
 
     @Override
-    public PrgState execute(PrgState prgState) throws StatementException, ADTException {
+    public PrgState execute(PrgState prgState) throws StatementException, ADTException, ExpressionException {
         if (!prgState.getSymTable().contains(this.variableName)) {
             throw new StatementException("Variable was not found");
         }
@@ -27,6 +27,11 @@ public class AssignStatement implements IStatement{
         }
         prgState.getSymTable().insert(this.variableName, evalValue);
         return prgState;
+    }
+
+    @Override
+    public IStatement deepCopy() {
+        return new AssignStatement( new String(this.variableName),  this.expression.deepCopy());
     }
 
     @Override

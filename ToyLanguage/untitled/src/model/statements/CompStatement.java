@@ -22,6 +22,11 @@ public class CompStatement implements IStatement{
     }
 
     @Override
+    public IStatement deepCopy() {
+        return new CompStatement(this.statement1, this.statement2);
+    }
+
+    @Override
     public String toString() {
         return statement1.toString() + ";" + statement2.toString();
     }
