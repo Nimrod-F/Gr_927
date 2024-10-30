@@ -51,4 +51,9 @@ public class AritmeticalExpression implements IExpression {
         }
 
     }
+
+    @Override
+    public IExpression deepCopy() {
+        return new AritmeticalExpression(this.left.deepCopy(),  this.operator,  this.right).deepCopy();
+    }
 }

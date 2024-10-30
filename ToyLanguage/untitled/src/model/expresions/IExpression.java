@@ -8,4 +8,5 @@ import model.adt.MyIDictionary;
 
 public interface IExpression {
     IValue eval(MyIDictionary<String, IValue> symTbl) throws ADTException, ExpressionException;
+    IExpression deepCopy();
 }
