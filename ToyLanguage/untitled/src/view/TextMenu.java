@@ -1,48 +1,47 @@
 package view;
 
-
-import model.adt.MyIDictionary;
+import model.adts.MyIMap;
+import model.adts.MyMap;
 import view.commands.Command;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
+import java.util.Map;
+
 public class TextMenu {
-    private Map<String, Command> map;
 
-    public TextMenu(){
-        this.map = new HashMap<>();
+    private Map<String, Command> commands;
+
+    public TextMenu() {
+        this.commands = new HashMap<>();
+
     }
 
-    public void addCommand(Command cm){
-        this.map.put(cm.getKey(), cm);
+    public void addCommand(Command command) {
+        this.commands.put(command.getKey(), command);
     }
 
-    private void printMenu(){
-        for(Command cm : this.map.values()){
-            String line = String.format("%4s : %s", cm.getKey(), cm.getDescription());
+    private void printMenu() {
+        for (Command command : this.commands.values()) {
+            String line = String.format("%4s : {\n%s\n}\n", command.getKey(), command.getDescription());
             System.out.println(line);
         }
-
     }
 
-    public void show(){
-        Scanner sc = new Scanner(System.in);
-        while(true){
+    public void show() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
             printMenu();
-            System.out.println("Option is: ");
-            String line = sc.nextLine();
-            Command cm = this.map.get(line);
-            if(cm == null)
-            {
-
-                System.out.println("Invalid command");
-                continue;
+            System.out.printf("Input your option: ");
+            String key = scanner.nextLine();
+            if (!this.commands.containsKey(key))
+                System.out.println("Invalid option");
+            else {
+                Command command = this.commands.get(key);
+                command.execute();
             }
-            cm.execute();
         }
-
-
     }
+
 }

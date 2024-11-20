@@ -9,24 +9,8 @@ import model.adt.MyIList;
 import model.value.StringValue;
 
 public class PrgState {
+
     private MyIDictionary<String, IValue> symTable;
-
-    public MyIDictionary<String, IValue> getSymTable() {
-        return symTable;
-    }
-
-    public void setSymTable(MyIDictionary<String, IValue> symTable) {
-        this.symTable = symTable;
-    }
-
-    public MyIStack<IStatement> getExeStack() {
-        return exeStack;
-    }
-
-    public void setExeStack(MyIStack<IStatement> exeStack) {
-        this.exeStack = exeStack;
-    }
-
     private MyIStack<IStatement> exeStack;
     private MyIList<String> output;
     private IStatement initialState;
@@ -45,6 +29,19 @@ public class PrgState {
         this.initialState = initialState.deepCopy();
         this.exeStack.push(this.initialState);
         this.fileTable = fileTable;
+    }
+
+    public MyIDictionary<String, IValue> getSymTable() {
+        return symTable;
+    }
+    public void setSymTable(MyIDictionary<String, IValue> symTable) {
+        this.symTable = symTable;
+    }
+    public MyIStack<IStatement> getExeStack() {
+        return exeStack;
+    }
+    public void setExeStack(MyIStack<IStatement> exeStack) {
+        this.exeStack = exeStack;
     }
 
     public MyIDictionary<StringValue, BufferedReader> getFileTable(){

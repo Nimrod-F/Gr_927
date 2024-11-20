@@ -1,7 +1,9 @@
 package exceptions;
 
+import repo.Repository;
+
 public class RepoException extends Exception {
-    public RepoException(String message) {
-        super(message);
+    public RepoException(String msg) {
+        super(msg);
     }
 }

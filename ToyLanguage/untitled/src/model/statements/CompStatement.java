@@ -1,10 +1,11 @@
 package model.statements;
 
-import exceptions.ADTException;
+import exceptions.KeyNotFoundException;
 import exceptions.StatementException;
-import model.state.PrgState;
+import model.states.PrgState;
 
-public class CompStatement implements IStatement{
+public class CompStatement implements IStatement {
+
     private IStatement statement1;
     private IStatement statement2;
 
@@ -13,22 +14,21 @@ public class CompStatement implements IStatement{
         this.statement2 = statement2;
     }
 
-    @Override
-    public PrgState execute(PrgState prgState) throws StatementException, ADTException {
-        prgState.getExeStack().push(statement2);
-        prgState.getExeStack().push(statement1);
 
+    @Override
+    public PrgState execute(PrgState prgState) throws StatementException, KeyNotFoundException {
+        prgState.getExecStack().push(this.statement2);
+        prgState.getExecStack().push(this.statement1);
         return prgState;
     }
 
     @Override
     public IStatement deepCopy() {
-        return new CompStatement(this.statement1, this.statement2);
+        return new CompStatement(this.statement1.deepCopy(), this.statement2.deepCopy());
     }
 
     @Override
     public String toString() {
-        return statement1.toString() + ";" + statement2.toString();
+        return this.statement1.toString() + "\n" + this.statement2.toString();
     }
-
 }

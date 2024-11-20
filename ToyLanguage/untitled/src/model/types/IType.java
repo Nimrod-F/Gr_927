@@ -1,7 +1,9 @@
 package model.types;
-import model.value.IValue;
+
+import model.values.IValue;
 
 public interface IType {
     boolean equals(IType obj);
-    IValue defaultValue();
+
+    IValue getDefaultValue();
 }

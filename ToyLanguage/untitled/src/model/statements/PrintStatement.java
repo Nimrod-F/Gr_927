@@ -1,30 +1,35 @@
 package model.statements;
 
-import exceptions.ADTException;
 import exceptions.ExpressionException;
-import model.state.PrgState;
-import model.expresions.IExpression;
-import model.value.IValue;
+import exceptions.KeyNotFoundException;
+import exceptions.StatementException;
+import model.expressions.IExpression;
+import model.states.PrgState;
+import model.values.IValue;
 
-public class PrintStatement implements IStatement{
+public class PrintStatement implements IStatement {
+
     private IExpression expression;
+
     public PrintStatement(IExpression expression) {
         this.expression = expression;
     }
 
     @Override
-    public PrgState execute(PrgState prgState) throws ADTException, ExpressionException {
-        IValue result = this.expression.eval(prgState.getSymTable());
-        prgState.getOutput().add(result.toString());
+    public PrgState execute(PrgState prgState) throws StatementException, ExpressionException, KeyNotFoundException {
+        IValue value = this.expression.evaluate(prgState.getSymTable());
+        prgState.getOutputList().add(value.toString());
         return prgState;
     }
 
+
     @Override
     public IStatement deepCopy() {
-        return new PrintStatement(this.expression);
+        return new PrintStatement(this.expression.deepCopy());
     }
 
-    public String toString(){
-        return "print(" + expression.toString() + ")";
+    @Override
+    public String toString() {
+        return "print(" + this.expression.toString() + ");";
     }
 }
